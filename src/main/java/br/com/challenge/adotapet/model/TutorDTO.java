@@ -1,13 +1,22 @@
 package br.com.challenge.adotapet.model;
 
 import br.com.challenge.adotapet.repository.TutorRepository;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+
 
 public class TutorDTO {
 
-
+    @NotBlank
     private String name;
+
+    @Email
     private String email;
+
+    @NotBlank
     private String city;
+
+    @NotBlank
     private String aboutMe;
 
     public TutorDTO() {}
