@@ -10,4 +10,6 @@ public interface TutorRepository extends JpaRepository<Tutor, Long> {
     Optional<Tutor> findById(Long id);
 
     void deleteById(Long id);
+
+    Optional<Tutor> findByEmail(String email);
 }

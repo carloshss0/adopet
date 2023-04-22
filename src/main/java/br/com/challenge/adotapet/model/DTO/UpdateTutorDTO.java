@@ -1,17 +1,14 @@
-package br.com.challenge.adotapet.model;
+package br.com.challenge.adotapet.model.DTO;
 
+import br.com.challenge.adotapet.model.Tutor;
 import br.com.challenge.adotapet.repository.TutorRepository;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 
-public class TutorDTO {
+public class UpdateTutorDTO {
 
     @NotBlank
     private String name;
-
-    @Email
-    private String email;
 
     @NotBlank
     private String city;
@@ -19,21 +16,20 @@ public class TutorDTO {
     @NotBlank
     private String aboutMe;
 
-    public TutorDTO() {}
+    @NotBlank
+    private String tutorPhotoUrl;
 
-    public TutorDTO (Tutor tutor) {
+    public UpdateTutorDTO() {}
+
+    public UpdateTutorDTO(Tutor tutor) {
         this.name = tutor.getName();
-        this.email = tutor.getEmail();
         this.city = tutor.getCity();
         this.aboutMe = tutor.getAboutMe();
+        this.tutorPhotoUrl = tutor.getTutorPhotoUrl();
     }
 
     public String getName() {
         return name;
-    }
-
-    public String getEmail() {
-        return email;
     }
 
     public String getCity() {
@@ -44,13 +40,14 @@ public class TutorDTO {
         return aboutMe;
     }
 
+    public String getTutorPhotoUrl() {
+        return tutorPhotoUrl;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public void setCity(String city) {
         this.city = city;
@@ -60,24 +57,19 @@ public class TutorDTO {
         this.aboutMe = aboutMe;
     }
 
-    public Tutor atualizar(Long id, TutorRepository tutorRepository) {
+    public void setTutorPhotoUrl(String tutorPhotoUrl) {
+        this.tutorPhotoUrl = tutorPhotoUrl;
+    }
+
+    public Tutor update(Long id, TutorRepository tutorRepository) {
         Tutor tutor = tutorRepository.getReferenceById(id);
 
         tutor.setName(this.name);
-        tutor.setEmail(this.email);
         tutor.setCity(this.city);
         tutor.setAboutMe(this.aboutMe);
+        tutor.setTutorPhotoUrl(this.tutorPhotoUrl);
 
         return tutor;
     }
 
-    public Tutor convert() {
-        Tutor tutor = new Tutor();
-        tutor.setName(this.name);
-        tutor.setEmail(this.email);
-        tutor.setCity(this.city);
-        tutor.setAboutMe(this.aboutMe);
-
-        return tutor;
-    }
 }

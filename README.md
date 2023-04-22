@@ -9,7 +9,7 @@ animais das ruas. A proposta da AdoPet é trazer mais usuários e aumentar a int
 representantes dessas ONGs e para isso, o objetivo do projeto é implementar uma plataforma e levar a empresa pro mundo 
 digital.
 
-Este projeto foi desenvolvido como resultado de um Desafio Back-End (4ª edição) exclusivo para alunos da escola de 
+Este projeto foi desenvolvido como resultado de um Desafio Back-End (6ª edição) exclusivo para alunos da escola de 
 tecnologia [Alura](https://www.alura.com.br). Estou desenvolvendo esse projeto utilzando a linguagem Java e o framework
 Spring. Vem sendo um projeto interessante pois tenta emular um ambiente com utilização de backlogs no Trello, onde no prazo
 de 1 semana você tem que entregar novas funcionalidades para a aplicação.

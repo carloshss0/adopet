@@ -1,8 +1,10 @@
 package br.com.challenge.adotapet.controller;
 
 
+import br.com.challenge.adotapet.model.DTO.CreateTutorDTO;
+import br.com.challenge.adotapet.model.DTO.GetTutorDTO;
+import br.com.challenge.adotapet.model.DTO.UpdateTutorDTO;
 import br.com.challenge.adotapet.model.Tutor;
-import br.com.challenge.adotapet.model.TutorDTO;
 import br.com.challenge.adotapet.service.TutorService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -27,20 +29,26 @@ public class TutorController {
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<TutorDTO> updateTutor (@PathVariable Long id, @RequestBody @Valid TutorDTO tutorDTO) {
-        Tutor tutor = tutorservice.updateTutor(id, tutorDTO);
+    public ResponseEntity<UpdateTutorDTO> updateTutor (@PathVariable Long id, @RequestBody @Valid UpdateTutorDTO updateTutorDTO) {
+        Tutor tutor = tutorservice.updateTutor(id, updateTutorDTO);
         if (tutor != null) {
-            return ResponseEntity.ok(new TutorDTO(tutor));
+            return ResponseEntity.ok(new UpdateTutorDTO(tutor));
         }
         return ResponseEntity.notFound().build();
     }
 
     @PostMapping
     @Transactional
-    public ResponseEntity<TutorDTO> createTutor (@RequestBody @Valid TutorDTO tutorDTO, UriComponentsBuilder uriBuilder) {
-        Tutor tutor = tutorservice.createTutor(tutorDTO);
-        URI uri = uriBuilder.path("/topicos/{id}").buildAndExpand(tutor.getId()).toUri();
-        return ResponseEntity.created(uri).body(new TutorDTO(tutor));
+    public ResponseEntity<?> createTutor (@RequestBody @Valid CreateTutorDTO createTutorDTO, UriComponentsBuilder uriBuilder) {
+        if (tutorservice.verifyEmailTutor(createTutorDTO)) {
+            Tutor tutor = tutorservice.createTutor(createTutorDTO);
+            URI uri = uriBuilder.path("/topicos/{id}").buildAndExpand(tutor.getId()).toUri();
+            return ResponseEntity.created(uri).body(new CreateTutorDTO(tutor));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE)
+                    .body("E-mail já cadastrado");
+        }
+
     }
 
     @GetMapping()
@@ -51,19 +59,18 @@ public class TutorController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Não encontrado");
         }
-        List<TutorDTO> tutorDTOs = tutors.stream()
-                .map(tutor -> new TutorDTO(tutor))
+        List<GetTutorDTO> tutorDTOs = tutors.stream()
+                .map(tutor -> new GetTutorDTO(tutor))
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(tutorDTOs);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TutorDTO> getTutor (@PathVariable Long id) {
+    public ResponseEntity<GetTutorDTO> getTutor (@PathVariable Long id) {
         Optional<Tutor> tutor = tutorservice.getTutor(id);
         if (tutor.isPresent()) {
-            tutorservice.deleteTutor(id);
-            return ResponseEntity.ok(new TutorDTO(tutor.get()));
+            return ResponseEntity.ok(new GetTutorDTO(tutor.get()));
         }
         return ResponseEntity.notFound().build();
     }

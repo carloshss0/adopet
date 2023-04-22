@@ -13,8 +13,19 @@ public class Tutor {
     private Long id;
     private String name;
     private String email;
+    private String password;
+    private String tutorPhotoUrl;
     private String city;
     private String aboutMe;
+
+    public Tutor() {
+    }
+
+    public Tutor(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
 
     public Long getId() {
         return id;
@@ -52,4 +63,19 @@ public class Tutor {
         this.aboutMe = aboutMe;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public String getTutorPhotoUrl() {
+        return tutorPhotoUrl;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setTutorPhotoUrl(String tutorPhotoUrl) {
+        this.tutorPhotoUrl = tutorPhotoUrl;
+    }
 }
