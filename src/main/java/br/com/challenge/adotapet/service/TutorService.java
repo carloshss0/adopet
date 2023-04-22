@@ -1,11 +1,10 @@
 package br.com.challenge.adotapet.service;
 
-import br.com.challenge.adotapet.model.DTO.CreateTutorDTO;
-import br.com.challenge.adotapet.model.DTO.UpdateTutorDTO;
+import br.com.challenge.adotapet.dto.CreateTutorDTO;
+import br.com.challenge.adotapet.dto.UpdateTutorDTO;
 import br.com.challenge.adotapet.model.Tutor;
 import br.com.challenge.adotapet.repository.TutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package br.com.challenge.adotapet.model.DTO;
+package br.com.challenge.adotapet.dto;
 
 import br.com.challenge.adotapet.model.Tutor;
 import jakarta.validation.constraints.Email;

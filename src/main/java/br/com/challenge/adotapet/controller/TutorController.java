@@ -1,9 +1,9 @@
 package br.com.challenge.adotapet.controller;
 
 
-import br.com.challenge.adotapet.model.DTO.CreateTutorDTO;
-import br.com.challenge.adotapet.model.DTO.GetTutorDTO;
-import br.com.challenge.adotapet.model.DTO.UpdateTutorDTO;
+import br.com.challenge.adotapet.dto.CreateTutorDTO;
+import br.com.challenge.adotapet.dto.ViewTutorDTO;
+import br.com.challenge.adotapet.dto.UpdateTutorDTO;
 import br.com.challenge.adotapet.model.Tutor;
 import br.com.challenge.adotapet.service.TutorService;
 import jakarta.transaction.Transactional;
@@ -42,7 +42,7 @@ public class TutorController {
     public ResponseEntity<?> createTutor (@RequestBody @Valid CreateTutorDTO createTutorDTO, UriComponentsBuilder uriBuilder) {
         if (tutorservice.verifyEmailTutor(createTutorDTO)) {
             Tutor tutor = tutorservice.createTutor(createTutorDTO);
-            URI uri = uriBuilder.path("/topicos/{id}").buildAndExpand(tutor.getId()).toUri();
+            URI uri = uriBuilder.path("/tutores/{id}").buildAndExpand(tutor.getId()).toUri();
             return ResponseEntity.created(uri).body(new CreateTutorDTO(tutor));
         } else {
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE)
@@ -59,18 +59,18 @@ public class TutorController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Não encontrado");
         }
-        List<GetTutorDTO> tutorDTOs = tutors.stream()
-                .map(tutor -> new GetTutorDTO(tutor))
+        List<ViewTutorDTO> tutorDTOs = tutors.stream()
+                .map(tutor -> new ViewTutorDTO(tutor))
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(tutorDTOs);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<GetTutorDTO> getTutor (@PathVariable Long id) {
+    public ResponseEntity<ViewTutorDTO> getTutor (@PathVariable Long id) {
         Optional<Tutor> tutor = tutorservice.getTutor(id);
         if (tutor.isPresent()) {
-            return ResponseEntity.ok(new GetTutorDTO(tutor.get()));
+            return ResponseEntity.ok(new ViewTutorDTO(tutor.get()));
         }
         return ResponseEntity.notFound().build();
     }

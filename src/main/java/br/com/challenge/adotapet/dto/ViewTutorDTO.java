@@ -1,9 +1,8 @@
-package br.com.challenge.adotapet.model.DTO;
+package br.com.challenge.adotapet.dto;
 
 import br.com.challenge.adotapet.model.Tutor;
-import br.com.challenge.adotapet.repository.TutorRepository;
 
-public class GetTutorDTO {
+public class ViewTutorDTO {
 
     private String name;
     private String email;
@@ -11,10 +10,10 @@ public class GetTutorDTO {
     private String aboutMe;
     private String tutorPhotoUrl;
 
-    public GetTutorDTO() {
+    public ViewTutorDTO() {
     }
 
-    public GetTutorDTO(Tutor tutor) {
+    public ViewTutorDTO(Tutor tutor) {
         this.name = tutor.getName();
         this.email = tutor.getEmail();
         this.city = tutor.getCity();
