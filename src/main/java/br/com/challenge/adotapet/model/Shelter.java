@@ -16,7 +16,7 @@ public class Shelter {
     private String state;
 
     @OneToMany(mappedBy = "shelter")
-    private List<Pet> pets;
+    private List<Pet> pets = new ArrayList<>();
 
     public Shelter() {
     }
@@ -25,7 +25,6 @@ public class Shelter {
         this.name = nome;
         this.city = city;
         this.state = state;
-        this.pets = new ArrayList<>();
     }
 
     public Long getId() {
@@ -66,5 +65,10 @@ public class Shelter {
 
     public void setPets(List<Pet> pets) {
         this.pets = pets;
+    }
+
+    public void addPet(Pet pet) {
+        pets.add(pet);
+        pet.setShelter(this);
     }
 }

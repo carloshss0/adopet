@@ -11,7 +11,7 @@ public class Pet {
 
     private String petName;
     private String petPhotoUrl;
-    private Integer age;
+    private String age;
     private PetSize size;
     private PetSpecie specie;
     private String temper;
@@ -19,6 +19,28 @@ public class Pet {
     @ManyToOne
     @JoinColumn(name = "shelter_id")
     private Shelter shelter;
+
+    public Pet() {
+    }
+
+    public Pet(String petName, String petPhotoUrl, String age, String size,
+               String specie, String temper, Shelter shelter) {
+        this.petName = petName;
+        this.petPhotoUrl = petPhotoUrl;
+        this.age = age;
+        this.size = PetSize.valueOf(size);
+        this.specie = PetSpecie.valueOf(specie);
+        this.temper = temper;
+        shelter.addPet(this);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getPetName() {
         return petName;
@@ -36,11 +58,11 @@ public class Pet {
         this.petPhotoUrl = petPhotoUrl;
     }
 
-    public Integer getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(Integer age) {
+    public void setAge(String age) {
         this.age = age;
     }
 
