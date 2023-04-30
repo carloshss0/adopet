@@ -5,7 +5,6 @@ import br.com.challenge.adotapet.model.Shelter;
 import br.com.challenge.adotapet.repository.ShelterRepository;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.beans.factory.annotation.Autowired;
 
 
 import java.util.Optional;

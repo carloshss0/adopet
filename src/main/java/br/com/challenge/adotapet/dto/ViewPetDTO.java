@@ -13,6 +13,7 @@ public class ViewPetDTO {
     private String specie;
     private String temper;
     private String address;
+    private boolean adopted;
 
     public ViewPetDTO() {
     }
@@ -26,6 +27,7 @@ public class ViewPetDTO {
         this.size = pet.getSize().name();
         this.specie = pet.getSpecie().name();
         this.temper = pet.getTemper();
+        this.adopted = pet.isAdotado();
         this.address = pet.getShelter().getCity() + ", " + pet.getShelter().getState();
     }
 
@@ -91,5 +93,13 @@ public class ViewPetDTO {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public boolean isAdopted() {
+        return adopted;
+    }
+
+    public void setAdopted(boolean adopted) {
+        this.adopted = adopted;
     }
 }

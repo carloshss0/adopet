@@ -15,6 +15,7 @@ public class Pet {
     private PetSize size;
     private PetSpecie specie;
     private String temper;
+    private boolean adopted;
 
     @ManyToOne
     @JoinColumn(name = "shelter_id")
@@ -31,6 +32,7 @@ public class Pet {
         this.size = PetSize.valueOf(size);
         this.specie = PetSpecie.valueOf(specie);
         this.temper = temper;
+        this.adopted = false;
         shelter.addPet(this);
     }
 
@@ -96,5 +98,13 @@ public class Pet {
 
     public void setShelter(Shelter shelter) {
         this.shelter = shelter;
+    }
+
+    public boolean isAdotado() {
+        return adopted;
+    }
+
+    public void setAdotado(boolean adotado) {
+        this.adopted = adotado;
     }
 }
