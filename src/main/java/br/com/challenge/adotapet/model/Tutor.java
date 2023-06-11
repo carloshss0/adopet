@@ -75,6 +75,10 @@ public class Tutor {
         this.password = password;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public void setTutorPhotoUrl(String tutorPhotoUrl) {
         this.tutorPhotoUrl = tutorPhotoUrl;
     }

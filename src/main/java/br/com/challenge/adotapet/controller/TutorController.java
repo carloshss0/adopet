@@ -29,10 +29,10 @@ public class TutorController {
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<UpdateTutorDTO> updateTutor (@PathVariable Long id, @RequestBody @Valid UpdateTutorDTO updateTutorDTO) {
+    public ResponseEntity<ViewTutorDTO> updateTutor (@PathVariable Long id, @RequestBody @Valid UpdateTutorDTO updateTutorDTO) {
         Tutor tutor = tutorservice.updateTutor(id, updateTutorDTO);
         if (tutor != null) {
-            return ResponseEntity.ok(new UpdateTutorDTO(tutor));
+            return ResponseEntity.ok(new ViewTutorDTO(tutor));
         }
         return ResponseEntity.notFound().build();
     }
@@ -43,7 +43,7 @@ public class TutorController {
         if (tutorservice.verifyEmailTutor(createTutorDTO)) {
             Tutor tutor = tutorservice.createTutor(createTutorDTO);
             URI uri = uriBuilder.path("/tutores/{id}").buildAndExpand(tutor.getId()).toUri();
-            return ResponseEntity.created(uri).body(new CreateTutorDTO(tutor));
+            return ResponseEntity.created(uri).body(new ViewTutorDTO(tutor));
         } else {
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE)
                     .body("E-mail já cadastrado");

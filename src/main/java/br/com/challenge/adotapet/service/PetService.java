@@ -32,7 +32,7 @@ public class PetService {
 
     public List<Pet> listAllPets() {
 
-        return petRepository.findAll();
+        return petRepository.findByAdoptedFalse();
     }
 
     public Optional<Pet> getPet(Long id) {
