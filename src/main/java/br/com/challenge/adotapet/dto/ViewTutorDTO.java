@@ -3,7 +3,7 @@ package br.com.challenge.adotapet.dto;
 import br.com.challenge.adotapet.model.Tutor;
 
 public class ViewTutorDTO {
-
+    private Long id;
     private String name;
     private String email;
     private String city;
@@ -14,6 +14,7 @@ public class ViewTutorDTO {
     }
 
     public ViewTutorDTO(Tutor tutor) {
+        this.id = tutor.getId();
         this.name = tutor.getName();
         this.email = tutor.getEmail();
         this.city = tutor.getCity();
@@ -59,5 +60,13 @@ public class ViewTutorDTO {
 
     public void setTutorPhotoUrl(String tutorPhotoUrl) {
         this.tutorPhotoUrl = tutorPhotoUrl;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
