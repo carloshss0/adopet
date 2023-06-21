@@ -13,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
@@ -110,6 +112,15 @@ public class TutorControllerTest {
             Assertions.assertEquals(actualViewTutor.getId(),1L);
             Assertions.assertEquals(actualViewTutor.getName(), "John Doe");
             Assertions.assertEquals(actualViewTutor.getEmail(), "john@email.com");
+        }
+
+        @Test
+        @DisplayName("Find Tutor by Id and return 404")
+        public void findTutorByIdAndReturn404() throws Exception {
+            mockMvc.perform(MockMvcRequestBuilders.get("/tutores/{id}", 1L))
+                    .andExpect(status().isNotFound());
+
+
         }
     }
 
